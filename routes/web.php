@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ImagebotController;
 use App\Http\Controllers\OpenAIController;
-
+use App\Http\Controllers\CSVGenerateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +37,6 @@ Route::get('/openai', [OpenAIController::class , 'index']);
    
 Route::post('/openai/process', [OpenAIController::class , 'processInput'])->name('openai.process');
 
+
+Route::get('/generate',[CSVGenerateController::class , 'csvIndex'] );
+Route::post('/generate-csv', [CSVGenerateController::class , 'generateCSV'])->name('generate.csv');

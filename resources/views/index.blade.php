@@ -96,6 +96,8 @@
     </style>
 </head>
 <body>
+    {{-- @extends('layout')
+    @section('content') --}}
     <div class="chat-container">
         <h1>OpenAI Response</h1>
     <div class="message-container bot">
@@ -113,10 +115,11 @@
 
     <form action="{{ route('openai.process') }}" method="post">
         @csrf
-        <label for="input_text">Enter your input:</label><br>
-        <textarea name="input_text" id="input_text" cols="30" rows="10"></textarea><br>
-        <input type="submit" value="Process">
+        <div class="input-container">
+            <input type="text" name="message" id="message" placeholder="Type your message...">
+            <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
     </form>
-    <div> {{$outputText}}</div>
 </body>
 </html>
+    {{-- @endsection --}}

@@ -35,7 +35,7 @@ class OpenAIController extends Controller
 
     private function sendOpenAIRequest($inputText)
     {
-        $apiKey = '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';
+        $apiKey = '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';
         $apiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
         $headers = [

@@ -8,14 +8,12 @@ use Illuminate\Support\Facades\Http;
 
 class ChatbotController extends Controller
 {
-   
-
     public function chat(Request $request)
     {
         $message = $request->input('message');
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer  ' . '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',
+                'Authorization' => 'Bearer  ' . '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',
                 'Content-Type' => 'application/json',
             ])->post('https://api.openai.com/v1/chat/completions', [
                 'model' => 'gpt-3.5-turbo',
