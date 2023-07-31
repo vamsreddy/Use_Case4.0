@@ -1,0 +1,6 @@
+Employee ID,Employee Name,Designation,Total Working Days,Total Working Hours,Total Billable Hours,Bill Rate,Total Billable Amount,Tax Deductions,Bonus,Net Salary
+1001,John Doe,Software Engineer,22,176,160,100,16000,3000,5000,13500
+1002,Jane Smith,Accountant,20,160,152,120,18240,2500,4000,13740
+1003,Michael Johnson,Project Manager,21,168,160,150,24000,3500,4500,16000
+1004,Emily Brown,UI/UX Designer,22,176,168,110,18480,2800,3500,13180
+1005,Robert Davis,Marketing Specialist,21,168,160,90,14400,2000,3000,11400

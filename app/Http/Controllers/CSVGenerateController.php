@@ -35,7 +35,17 @@ class CSVGenerateController extends Controller
         $employeeAttendanceCSVData = $this->convertToCSV($employeeAttendanceData);
         file_put_contents('employee_attendance.csv', $employeeAttendanceCSVData);
 
-        // Step 5: Store the calculated results of employees in the result output CSV sheet
+        // Step 5: Calculate productivity and bonus for the employees
+        $employeeProductivityAndBonusData = $this->calculateProductivityAndBonus();
+        $employeeProductivityAndBonusCSVData = $this->convertToCSV($employeeProductivityAndBonusData);
+        file_put_contents('employee_productivity_bonus.csv', $employeeProductivityAndBonusCSVData);
+
+        // Step 6: Calculate payroll for the employees
+        $payrollData = $this->calculatePayroll();
+        $payrollCSVData = $this->convertToCSV($payrollData);
+        file_put_contents('employee_payroll.csv', $payrollCSVData);
+
+        // Step 7: Store the calculated results of employees in the result output CSV sheet
         // In this step, we won't use OpenAI as it's just formatting the data.
 
         return response()->json(['message' => 'CSV files generated successfully']);
@@ -43,7 +53,7 @@ class CSVGenerateController extends Controller
 
     private function generateEmployeeData()
     {
-        $prompt = 'Generate the csv file for 3  employees for june month (30 days) and Marked the Weekend (Saturday and Sunday as 0) having Employee ID as (EMP001,...),Date (DD-MM-YYYY),Day,Time-in (8AM - 10AM),Time-out (5PM-8PM),Total Hours Worked(Hrs)';
+        $prompt = 'Generate the csv file for 5  employees for june month (30 days) and Marked the Weekend (Saturday and Sunday as 0) having Employee ID as (EMP001,...),Date (DD-MM-YYYY),Day,Time-in (8AM - 10AM),Time-out (5PM-8PM),Total Hours Worked(Hrs)';
         // Send the prompt to the OpenAI API for text generation
         $response = $this->generateTextFromOpenAI($prompt);
         
@@ -55,7 +65,7 @@ class CSVGenerateController extends Controller
 
     private function generateEmployeeLeaveData()
     {
-        $prompt = 'Generate the csv for employee leave having Employee ID as (EMP001,...),Employee Name,Leave Type(half day,full day),Start Date,End Date,Leave Duration,Leave Status (Approval Status like Approved or Rejected) for June month';
+        $prompt = 'Generate the csv for 5 employee5 leave having Employee ID as (EMP001,...),Employee Name,Leave Type(half day,full day),Start Date,End Date,Leave Duration,Leave Status (Approval Status like Approved or Rejected) for June month';
 
         // Send the prompt to the OpenAI API for text generation
         $response = $this->generateTextFromOpenAI($prompt);
@@ -82,7 +92,7 @@ class CSVGenerateController extends Controller
     private function calculateEmployeeAttendance()
     {
         // Generate the prompt to request the user to provide the attendance data
-        $prompt = "Generate the Attendance sheet for 3 employees for june month  in to csv format which contain  headers, Employee Name,Employee Id(EMP...),Total Working Day(Calculated),Total Working Hours(Calculated).excluding weekends, holidays, leaves and based on number of working days, each day 8 hours being working hours.";
+        $prompt = "Generate the Attendance sheet for 5 employees for june month  in to csv format which contain  headers, Employee Name,Employee Id(EMP...),Total Working Day(Calculated),Total Working Hours(Calculated).excluding weekends, holidays, leaves and based on number of working days, each day 8 hours being working hours.";
 
         // Send the prompt to the OpenAI API for text generation
         $response = $this->generateTextFromOpenAI($prompt);
@@ -93,9 +103,40 @@ class CSVGenerateController extends Controller
         return $employeeAttendanceData;
     }
 
+    private function calculateProductivityAndBonus()
+    {
+        // Generate the prompt to request the user to provide the productivity and bonus data
+        $prompt = "Generate the CSV file for employee productivity and bonus data for the month of June with the following headers:\n"
+            . "Employee ID,Employee Name,Productivity,Bonus";
+
+        // Send the prompt to the OpenAI API for text generation
+        $response = $this->generateTextFromOpenAI($prompt);
+dd($response);
+        // Process the response and convert it to CSV data
+        $employeeProductivityAndBonusData = $response;
+
+        return $employeeProductivityAndBonusData;
+    }
+
+    private function calculatePayroll()
+    {
+        // Generate the prompt to request the user to provide the payroll data
+        $prompt = "Generate the CSV file for employee payroll data for the month of June with the following headers:\n"
+            . "Employee ID,Employee Name,Designation,Total Working Days,Total Working Hours,Total Billable Hours,Bill Rate,Total Billable Amount,Tax Deductions,Net Salary";
+
+        // Send the prompt to the OpenAI API for text generation
+        $response = $this->generateTextFromOpenAI($prompt);
+
+        // Process the response and convert it to CSV data
+        $payrollData = $response;
+
+        return $payrollData;
+    }
+
+
     private function generateTextFromOpenAI($prompt)
     {
-        $apiKey = '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';
+        $apiKey = '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';
         $apiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
         $headers = [
