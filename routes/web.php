@@ -5,6 +5,7 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ImagebotController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\CSVGenerateController;
+use App\Http\Controllers\UseCase30;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,9 @@ Route::post('/openai/process', [OpenAIController::class , 'processInput'])->name
 
 Route::get('/generate',[CSVGenerateController::class , 'csvIndex'] );
 Route::post('/generate-csv', [CSVGenerateController::class , 'generateCSV'])->name('generate.csv');
+
+Route::get('/menu', [UseCase30::class, 'showMenu'])->name('menu');
+Route::get('/process/{choice}', [UseCase30::class, 'processChoice'])->name('process');
+Route::post('/generate-response', [UseCase30::class, 'generateResponse'])->name('generate-response');
+Route::post('/send-email', [UseCase30::class, 'sendEmail'])->name('send-email');
+Route::get('/email-response', [UseCase30::class, 'showEmailResponse'])->name('email-response');

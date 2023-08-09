@@ -119,6 +119,10 @@
     <div class="navbar">
         <a href="openai" style="color:white">UseCase 1.1</a>
     </div>
+    <div class="navbar">
+        <a href="menu" style="color:white">UseCase 3.0</a>
+    </div>
+
 </div>
 
 
