@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagebotController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\CSVGenerateController;
 use App\Http\Controllers\UseCase30;
+use App\Http\Controllers\UseCase4Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,5 @@ Route::get('/process/{choice}', [UseCase30::class, 'processChoice'])->name('proc
 Route::post('/generate-response', [UseCase30::class, 'generateResponse'])->name('generate-response');
 Route::post('/send-email', [UseCase30::class, 'sendEmail'])->name('send-email');
 Route::get('/email-response', [UseCase30::class, 'showEmailResponse'])->name('email-response');
+
+Route::get('/products', [UseCase4Controller::class, 'index']);
